@@ -1,5 +1,5 @@
 // Stoke Park Room Finder – offline service worker. Cache name is versioned by build hash.
-const CACHE='spf-07f3237a12';
+const CACHE='spf-b1a3c66e1b';
 const ASSETS=['./','index.html','estate-patrols.jpg','estate-golf.jpg','estate-zones.jpg','manifest.webmanifest','icon-192.png','icon-512.png','apple-touch-icon.png'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS.map(u=>new Request(u,{cache:'reload'})))).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k.startsWith('spf-')&&k!=CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
